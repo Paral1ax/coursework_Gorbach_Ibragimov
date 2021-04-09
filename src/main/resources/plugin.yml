@@ -2,3 +2,7 @@ name: CourseworkPlugin
 version: ${project.version}
 main: com.course.courseworkplugin.CourseworkPlugin
 api-version: 1.16
+commands:
+  npc:
+    description: creates npc.
+    usage: /<command>

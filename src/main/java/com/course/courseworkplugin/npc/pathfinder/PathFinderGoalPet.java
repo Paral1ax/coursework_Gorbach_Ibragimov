@@ -5,7 +5,7 @@ import net.minecraft.server.v1_16_R3.*;
 
 import java.util.EnumSet;
 
-public class PathfinderGoalPet extends PathfinderGoal {
+public class PathFinderGoalPet extends PathfinderGoal {
 
     private final EntityInsentient a; // our pet
     private EntityLiving b; // owner
@@ -17,8 +17,7 @@ public class PathfinderGoalPet extends PathfinderGoal {
     private double d; // y
     private double e; // z
 
-
-    public PathfinderGoalPet(EntityInsentient a, double speed, float distance) {
+    public PathFinderGoalPet(EntityInsentient a, double speed, float distance) {
         this.a = a;
         this.f = speed;
         this.g = distance;
@@ -46,8 +45,8 @@ public class PathfinderGoalPet extends PathfinderGoal {
             // in air
             if (vec == null)
                 return false;
-            this.c = this.b.locX(); // x
-            this.d = this.b.locY(); // y
+            this.c = this.b.locX() + 1; // x
+            this.d = this.b.locY() + 1; // y
             this.e = this.b.locZ(); // z
             return true;
             // call upon c()

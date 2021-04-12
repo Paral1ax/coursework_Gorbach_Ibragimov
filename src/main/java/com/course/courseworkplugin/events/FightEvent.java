@@ -1,7 +1,8 @@
 package com.course.courseworkplugin.events;
 
-import com.course.courseworkplugin.commands.createNPC.CreateNPC;
-import com.course.courseworkplugin.npc.CustomNPC;
+import com.course.courseworkplugin.commands.createNPC.CreateNPCCommand;
+import com.course.courseworkplugin.npc.CustomMob;
+import com.course.courseworkplugin.npc.NPCCreator;
 import com.course.courseworkplugin.utils.Container;
 import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Bukkit;
@@ -27,20 +28,20 @@ public class FightEvent implements Listener {
 
     @EventHandler
     public void onFight(EntityDamageByEntityEvent event) {
-        if (CreateNPC.npc == null) return;
+        if (NPCCreator.mob == null) return;
         if (event.getDamager() instanceof Player & event.getEntity() instanceof CraftPig) {
 
-            PathfinderGoal melee = new PathfinderGoalMeleeAttack(CreateNPC.npc, 2.0, false);
-            PathfinderGoal attackable = new PathfinderGoalNearestAttackableTarget<>(CreateNPC.npc,
+            PathfinderGoal melee = new PathfinderGoalMeleeAttack(NPCCreator.mob, 2.0, false);
+            PathfinderGoal attackable = new PathfinderGoalNearestAttackableTarget<>(NPCCreator.mob,
                     EntityPig.class, false);
-            PathfinderGoal attackableTarget = new PathfinderGoalNearestAttackableTarget<>(CreateNPC.npc,
+            PathfinderGoal attackableTarget = new PathfinderGoalNearestAttackableTarget<>(NPCCreator.mob,
                     EntityPig.class, false);
 
             if (Container.flag) {
                 Container.pig = (CraftPig) event.getEntity();
-                CreateNPC.npc.addGoal(melee);
-                CreateNPC.npc.addGoal(attackable);
-                CreateNPC.npc.addTarget(attackableTarget);
+                NPCCreator.mob.addGoal(melee);
+                NPCCreator.mob.addGoal(attackable);
+                NPCCreator.mob.addTarget(attackableTarget);
                 runTask(event);
                 Container.flag = false;
             }
@@ -53,22 +54,23 @@ public class FightEvent implements Listener {
         id = new BukkitRunnable() {
             @Override
             public void run() {
-                if (CreateNPC.npc.dead) {
+                if (NPCCreator.mob.dead) {
                     Container.pig = null;
                     Container.flag = true;
                     Bukkit.broadcastMessage("DEAD");
                     cancel();
                 }
+                if (Container.pig == null) cancel();
                 if (Container.pig.getHealth() <= 0.1) {
-                    CreateNPC.npc.setHealth(0);
-                    CustomNPC pet = new CustomNPC(new Location(event.getDamager().getWorld(), CreateNPC.npc.locX(),
-                            CreateNPC.npc.locY(), CreateNPC.npc.locZ()), (Player) event.getDamager(), plugin);
-                    CreateNPC.npc.teleportAndSync(0, 0, 0);
+                    NPCCreator.mob.setHealth(0);
+                    CustomMob pet = new CustomMob(new Location(event.getDamager().getWorld(), NPCCreator.mob.locX(),
+                            NPCCreator.mob.locY(), NPCCreator.mob.locZ()), (Player) event.getDamager(), plugin);
+                    NPCCreator.mob.teleportAndSync(0, 0, 0);
                     pet.setCustomName(new ChatComponentText(ChatColor.LIGHT_PURPLE + event.getDamager().getName() + "'s Pet"));
                     pet.setOwner(((Player) event.getDamager()));
                     WorldServer server = ((CraftWorld) event.getDamager().getWorld()).getHandle();
                     server.addEntity(pet);
-                    CreateNPC.npc = pet;
+                    NPCCreator.mob = pet;
                     Container.pig = null;
                     Container.flag = true;
                     cancel();

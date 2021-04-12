@@ -16,20 +16,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class CustomNPC extends EntityZombieHusk {
+public class CustomMob extends EntityZombieHusk {
     public List<PathfinderGoal> goals = new ArrayList<>();
     public List<PathfinderGoal> targets = new ArrayList<>();
     public int goalsNumber;
     public int targetsNumber;
     Plugin plugin;
-    CustomNPC pet;
-    public PathFinderGoalPet petGoal;
+    CustomMob pet;
 
-    public CustomNPC(Location location, Player player, Plugin plugin) {
+    public CustomMob(Location location, Player player, Plugin plugin) {
         super(EntityTypes.HUSK, ((CraftWorld) Objects.requireNonNull(location.getWorld())).getHandle());
         this.setPosition(location.getX(), location.getY(), location.getZ());
-        this.setInvulnerable(true);
         this.setSilent(true);
+        this.setInvisible(true);
         removeAI();
         addPaths();
         addTargets();
@@ -51,8 +50,7 @@ public class CustomNPC extends EntityZombieHusk {
         goals.add(new PathfinderGoalFloat(this));
         goals.add(new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
         goals.add(new PathfinderGoalRandomLookaround(this));
-        petGoal = new PathFinderGoalPet(this, 1.5, 10);
-        goals.add(petGoal);
+        goals.add(new PathFinderGoalPet(this, 1.5, 10));
     }
 
     private void addTargets() {
@@ -112,7 +110,6 @@ public class CustomNPC extends EntityZombieHusk {
                     cancel();
                 }
                 if (goals.size() != goalsNumber || targets.size() != targetsNumber) {
-                    //removeAI();
                     plugin.getServer().broadcastMessage("Goals " + goals.size());
                     plugin.getServer().broadcastMessage("Goals " + goalsNumber);
                     plugin.getServer().broadcastMessage("Targets " + targets.size());
@@ -133,4 +130,10 @@ public class CustomNPC extends EntityZombieHusk {
     public void goThrowTargets() {
         targets.forEach(t -> this.targetSelector.a(targets.indexOf(t), t));
     }
+
+    @Override
+    public void setOnFire(int i) { }
+
+    @Override
+    public void setOnFire(int i, boolean callEvent) { }
 }

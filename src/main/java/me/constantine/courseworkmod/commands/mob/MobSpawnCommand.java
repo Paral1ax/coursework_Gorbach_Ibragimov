@@ -1,4 +1,4 @@
-package me.constantine.courseworkmod.commands;
+package me.constantine.courseworkmod.commands.mob;
 
 import me.constantine.courseworkmod.entity.Mob;
 import net.minecraft.server.v1_16_R3.*;
@@ -9,7 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
 import org.bukkit.entity.Player;
 
-public class MobCommand implements CommandExecutor {
+public class MobSpawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {

@@ -6,6 +6,7 @@ import me.constantine.courseworkmod.items.ItemManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
@@ -33,9 +34,16 @@ public class EventContainer implements Listener {
             if (event.getItem() != null) {
                 if (Objects.equals(event.getItem().getItemMeta(), ItemManager.wand.getItemMeta())) {
                     if (CourseWorkMod.landClaimer.getFirst() == null) {
-                        CourseWorkMod.landClaimer.setFirst(event.getClickedBlock());
-                    } else if (CourseWorkMod.landClaimer.getSecond() == null)
-                        CourseWorkMod.landClaimer.setSecond(event.getClickedBlock());
+                        Block picked = event.getClickedBlock();
+                        CourseWorkMod.landClaimer.setFirst(picked);
+                        Bukkit.broadcastMessage("You claimed first block at (" + picked.getX() +
+                                ", " + picked.getY() + ", " + picked.getZ() + ")");
+                    } else if (CourseWorkMod.landClaimer.getSecond() == null) {
+                        Block picked = event.getClickedBlock();
+                        CourseWorkMod.landClaimer.setSecond(picked);
+                        Bukkit.broadcastMessage("You claimed second block at (" + picked.getX() +
+                                ", " + picked.getY() + ", " + picked.getZ() + ")");
+                    }
                     CourseWorkMod.landClaimer.process();
                 }
             }

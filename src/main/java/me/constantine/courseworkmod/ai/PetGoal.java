@@ -1,5 +1,6 @@
 package me.constantine.courseworkmod.ai;
 
+import me.constantine.courseworkmod.CourseWorkMod;
 import net.minecraft.server.v1_16_R3.*;
 
 import java.util.EnumSet;
@@ -27,6 +28,7 @@ public class PetGoal extends PathfinderGoal {
     public boolean a() {
         // Will start event if this is true
         // runs every tick
+        if (!CourseWorkMod.MOB.stand) return false;
         this.b = this.a.getGoalTarget();
         if (this.b == null) {
             return false;
@@ -54,11 +56,13 @@ public class PetGoal extends PathfinderGoal {
 
     public void c() {
         // runner :)                x      y        z    speed
+        if (!CourseWorkMod.MOB.stand) return;
         this.a.getNavigation().a(this.c, this.d, this.e, this.f);
     }
 
     public boolean b() {
         // run every tick as long as its true (repeats c)
+        if (!CourseWorkMod.MOB.stand) return false;
         return !this.a.getNavigation().m() && this.b.h(this.a) < (double) (this.g * this.g);
     }
 

@@ -1,6 +1,8 @@
 package me.constantine.courseworkmod.commands;
 
+import me.constantine.courseworkmod.CourseWorkMod;
 import me.constantine.courseworkmod.items.ItemManager;
+import me.constantine.courseworkmod.utils.claimer.LandClaimer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,6 +14,7 @@ public class WandCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if(sender instanceof Player){
             Player player = (Player) sender;
+            CourseWorkMod.landClaimer = new LandClaimer();
             player.getInventory().addItem(ItemManager.wand);
         } else {
             Bukkit.broadcastMessage("Only a player can send this command");

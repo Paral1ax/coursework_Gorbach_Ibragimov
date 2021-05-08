@@ -17,4 +17,6 @@ public class MessagesContainer {
     public static final String RECIPE_HELP = "Available recipes:\nchest, ";
 
     public static final String BUILD_HELP ="Available buildings:\nhouse1, house2, farm";
+
+    public static final String WAND_NULL = "You should claim territory with wand first";
 }

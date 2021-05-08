@@ -12,3 +12,12 @@ commands:
   wand:
     description: gives a wand.
     usage: /<command>
+  standby:
+    description: mob stanby mode.
+    usage: /<command>
+  notstandby:
+    description: mob stanby mode canceled;
+    usage: /<command>
+  teleport:
+    description: mob teleports to player.
+    usage: /<command>

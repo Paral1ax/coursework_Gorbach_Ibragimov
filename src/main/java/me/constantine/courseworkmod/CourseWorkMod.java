@@ -1,8 +1,10 @@
 package me.constantine.courseworkmod;
 
-import me.constantine.courseworkmod.commands.BuildCommand;
-import me.constantine.courseworkmod.commands.MobCommand;
-import me.constantine.courseworkmod.commands.WandCommand;
+import me.constantine.courseworkmod.commands.*;
+import me.constantine.courseworkmod.commands.mob.MobNotStandByCommand;
+import me.constantine.courseworkmod.commands.mob.MobSpawnCommand;
+import me.constantine.courseworkmod.commands.mob.MobStandByCommand;
+import me.constantine.courseworkmod.commands.mob.MobTeleportCommand;
 import me.constantine.courseworkmod.entity.Mob;
 import me.constantine.courseworkmod.events.EventContainer;
 import me.constantine.courseworkmod.items.ItemManager;
@@ -22,10 +24,12 @@ public final class CourseWorkMod extends JavaPlugin {
     @Override
     public void onEnable() {
         ItemManager.init();
-        landClaimer = new LandClaimer();
         getServer().getPluginManager().registerEvents(new EventContainer(), this);
-        Objects.requireNonNull(getCommand("mob")).setExecutor(new MobCommand());
+        Objects.requireNonNull(getCommand("mob")).setExecutor(new MobSpawnCommand());
         Objects.requireNonNull(getCommand("wand")).setExecutor(new WandCommand());
         Objects.requireNonNull(getCommand("build")).setExecutor(new BuildCommand());
+        Objects.requireNonNull(getCommand("standby")).setExecutor(new MobStandByCommand());
+        Objects.requireNonNull(getCommand("notstandby")).setExecutor(new MobNotStandByCommand());
+        Objects.requireNonNull(getCommand("teleport")).setExecutor(new MobTeleportCommand());
     }
 }

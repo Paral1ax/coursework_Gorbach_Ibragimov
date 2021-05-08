@@ -2,7 +2,7 @@ package me.constantine.courseworkmod.utils.executors.build.houses;
 
 import me.constantine.courseworkmod.utils.executors.build.EmptySpace;
 
-public class HouseExecutor {
+public class HouseFirstExecutor {
 
     public static void process() {
         EmptySpace.empty();

@@ -14,8 +14,10 @@ import org.bukkit.inventory.InventoryHolder;
 
 public class Mob extends EntityZombie implements InventoryHolder {
     public Inventory inventory;
+    public boolean stand = true;
+
     public Mob(Player player) {
-        super(EntityTypes.HUSK, ((CraftWorld)player.getWorld()).getHandle());
+        super(EntityTypes.HUSK, ((CraftWorld) player.getWorld()).getHandle());
         Location loc = player.getLocation();
         this.setSilent(true);
         this.setBaby(false);
@@ -26,7 +28,8 @@ public class Mob extends EntityZombie implements InventoryHolder {
         this.setGoalTarget(((CraftPlayer) player).getHandle(),
                 EntityTargetEvent.TargetReason.CUSTOM, false);
         CourseWorkMod.MOB = this;
-        CourseWorkMod.mobInventory = Bukkit.getServer().createInventory(CourseWorkMod.MOB, 15, "Mob Inventory");;
+        CourseWorkMod.mobInventory = Bukkit.getServer().createInventory(CourseWorkMod.MOB, 16, "Mob Inventory");
+        ;
     }
 
     @Override

@@ -1,6 +1,6 @@
 package me.constantine.courseworkmod.entity;
 
-import me.constantine.courseworkmod.Courseworkmod;
+import me.constantine.courseworkmod.CourseWorkMod;
 import me.constantine.courseworkmod.ai.PetGoal;
 import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Location;
@@ -21,7 +21,7 @@ public class Mob extends EntityZombie {
         this.setCustomNameVisible(true);
         this.setGoalTarget(((CraftPlayer) player).getHandle(),
                 EntityTargetEvent.TargetReason.CUSTOM, false);
-        Courseworkmod.MOB = this;
+        CourseWorkMod.MOB = this;
     }
 
     @Override

@@ -1,8 +1,14 @@
-name: Courseworkmod
+name: CourseWorkMod
 version: ${project.version}
-main: me.constantine.courseworkmod.Courseworkmod
+main: me.constantine.courseworkmod.CourseWorkMod
 api-version: 1.16
 commands:
   mob:
     description: spawns mob.
+    usage: /<command>
+  build:
+    description: placing 1 block.
+    usage: /<command>
+  wand:
+    description: gives a wand.
     usage: /<command>

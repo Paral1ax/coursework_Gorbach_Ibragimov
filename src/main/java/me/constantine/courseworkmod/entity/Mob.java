@@ -3,13 +3,17 @@ package me.constantine.courseworkmod.entity;
 import me.constantine.courseworkmod.CourseWorkMod;
 import me.constantine.courseworkmod.ai.PetGoal;
 import net.minecraft.server.v1_16_R3.*;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
 
-public class Mob extends EntityZombie {
+public class Mob extends EntityZombie implements InventoryHolder {
+    public Inventory inventory;
     public Mob(Player player) {
         super(EntityTypes.HUSK, ((CraftWorld)player.getWorld()).getHandle());
         Location loc = player.getLocation();
@@ -22,6 +26,7 @@ public class Mob extends EntityZombie {
         this.setGoalTarget(((CraftPlayer) player).getHandle(),
                 EntityTargetEvent.TargetReason.CUSTOM, false);
         CourseWorkMod.MOB = this;
+        CourseWorkMod.mobInventory = Bukkit.getServer().createInventory(CourseWorkMod.MOB, 15, "Mob Inventory");;
     }
 
     @Override
@@ -43,4 +48,8 @@ public class Mob extends EntityZombie {
     public void setOnFire(int i, boolean callEvent) {
     }
 
+    @Override
+    public Inventory getInventory() {
+        return inventory;
+    }
 }

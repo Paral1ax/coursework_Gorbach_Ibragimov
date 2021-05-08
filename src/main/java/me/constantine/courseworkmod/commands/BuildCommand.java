@@ -1,5 +1,6 @@
 package me.constantine.courseworkmod.commands;
 
+import me.constantine.courseworkmod.utils.executors.build.FarmExecutor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,7 +17,7 @@ public class BuildCommand implements CommandExecutor {
             } else if (args[0].equals("house2")) {
 
             } else if (args[0].equals("farm")) {
-
+                FarmExecutor.process();
             } else if (args[0].equals("help")) {
 
             }

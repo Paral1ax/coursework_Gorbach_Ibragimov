@@ -1,0 +1,8 @@
+name: Courseworkmod
+version: ${project.version}
+main: me.constantine.courseworkmod.Courseworkmod
+api-version: 1.16
+commands:
+  mob:
+    description: spawns mob.
+    usage: /<command>

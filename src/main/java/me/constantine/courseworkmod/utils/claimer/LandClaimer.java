@@ -36,9 +36,9 @@ public class LandClaimer {
         World world = first.getWorld();
         list.add(first);
         list.add(second);
-        double mainY = Math.min(first.getY(), second.getY());
-        list.add(new Location(world, second.getX(), mainY, first.getZ()).getBlock());
-        list.add(new Location(world, first.getX(), mainY, second.getZ()).getBlock());
+        //double mainY = Math.min(first.getY(), second.getY());
+        list.add(new Location(world, second.getX(), first.getY(), first.getZ()).getBlock());
+        list.add(new Location(world, first.getX(), second.getY(), second.getZ()).getBlock());
         for (Block block : list) {
             block.setType(Material.GOLD_BLOCK);
         }

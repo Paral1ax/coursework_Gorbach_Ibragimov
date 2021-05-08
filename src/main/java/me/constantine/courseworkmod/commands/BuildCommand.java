@@ -1,6 +1,6 @@
 package me.constantine.courseworkmod.commands;
 
-import me.constantine.courseworkmod.utils.executors.build.FarmExecutor;
+import me.constantine.courseworkmod.utils.executors.build.farm.FarmExecutor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -1,4 +1,4 @@
-package me.constantine.courseworkmod.utils.executors.build;
+package me.constantine.courseworkmod.utils.executors.build.farm;
 
 import me.constantine.courseworkmod.CourseWorkMod;
 import org.bukkit.Location;

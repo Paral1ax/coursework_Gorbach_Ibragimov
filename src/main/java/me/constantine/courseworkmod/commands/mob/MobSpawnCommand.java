@@ -3,6 +3,8 @@ package me.constantine.courseworkmod.commands.mob;
 import me.constantine.courseworkmod.entity.Mob;
 import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,7 +21,7 @@ public class MobSpawnCommand implements CommandExecutor {
             world.addEntity(mob);
             player.sendMessage("Mob spawned");
         } else {
-            Bukkit.broadcastMessage("Only a player can use this command");
+            Bukkit.broadcastMessage(ChatColor.RED+"Only a player can use this command");
         }
         return false;
     }

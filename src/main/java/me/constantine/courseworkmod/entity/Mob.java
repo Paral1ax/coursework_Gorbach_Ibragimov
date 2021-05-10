@@ -12,6 +12,8 @@ import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 
+import java.util.UUID;
+
 public class Mob extends EntityZombie implements InventoryHolder {
     public Inventory inventory;
     public boolean stand = true;

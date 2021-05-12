@@ -25,6 +25,8 @@ public class FarmExecutor {
                         x == (int) min.getX() || x == (int) max.getX()) {
                     Location cord = new Location(max.getWorld(), x, min.getY() + 1, z);
                     cord.getBlock().setType(Material.OAK_FENCE);
+                    if (min.getX()==x&&z==(max.getZ()-min.getZ()+1)/2)
+                        cord.getBlock().setType(Material.OAK_FENCE_GATE);
                 } else {
                     Location cord = new Location(max.getWorld(), x, min.getY(), z);
                     cord.getBlock().setType(Material.FARMLAND);

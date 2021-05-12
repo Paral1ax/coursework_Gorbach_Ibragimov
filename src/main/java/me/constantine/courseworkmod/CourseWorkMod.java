@@ -1,10 +1,7 @@
 package me.constantine.courseworkmod;
 
 import me.constantine.courseworkmod.commands.*;
-import me.constantine.courseworkmod.commands.mob.MobNotStandByCommand;
-import me.constantine.courseworkmod.commands.mob.MobSpawnCommand;
-import me.constantine.courseworkmod.commands.mob.MobStandByCommand;
-import me.constantine.courseworkmod.commands.mob.MobTeleportCommand;
+import me.constantine.courseworkmod.commands.mob.*;
 import me.constantine.courseworkmod.entity.Mob;
 import me.constantine.courseworkmod.events.EventContainer;
 import me.constantine.courseworkmod.items.ItemManager;
@@ -31,5 +28,7 @@ public final class CourseWorkMod extends JavaPlugin {
         Objects.requireNonNull(getCommand("standby")).setExecutor(new MobStandByCommand());
         Objects.requireNonNull(getCommand("notstandby")).setExecutor(new MobNotStandByCommand());
         Objects.requireNonNull(getCommand("teleport")).setExecutor(new MobTeleportCommand());
+        Objects.requireNonNull(getCommand("die")).setExecutor(new MobDieCommand());
     }
+
 }

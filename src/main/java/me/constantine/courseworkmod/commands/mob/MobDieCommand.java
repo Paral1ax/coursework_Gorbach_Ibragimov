@@ -1,28 +1,22 @@
 package me.constantine.courseworkmod.commands.mob;
 
 import me.constantine.courseworkmod.CourseWorkMod;
-import me.constantine.courseworkmod.entity.Mob;
-import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
-public class MobSpawnCommand implements CommandExecutor {
+public class MobDieCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            Player player = (Player) sender;
-            WorldServer world = ((CraftWorld) player.getWorld()).getHandle();
-            if(CourseWorkMod.MOB != null) {
-                Bukkit.broadcastMessage("You already have a mob");
-                return false;
+            if (CourseWorkMod.MOB != null) {
+                for (ItemStack item : CourseWorkMod.MOB.getInventory().getContents())
+                    CourseWorkMod.PLAYER.getInventory().addItem(item);
+                CourseWorkMod.MOB.setHealth(0);
             }
-            Mob mob = new Mob(player);
-            world.addEntity(mob);
-            player.sendMessage("Mob spawned");
         } else {
             Bukkit.broadcastMessage("Only a player can use this command");
         }

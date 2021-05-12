@@ -21,6 +21,7 @@ public class Mob extends EntityZombie implements InventoryHolder {
         Location loc = player.getLocation();
         this.setSilent(true);
         this.setBaby(false);
+        this.setCanPickupLoot(true);
         this.setLocation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
         this.setCustomName(new ChatComponentText(
                 player.getName() + "'s Mob"));
@@ -28,8 +29,7 @@ public class Mob extends EntityZombie implements InventoryHolder {
         this.setGoalTarget(((CraftPlayer) player).getHandle(),
                 EntityTargetEvent.TargetReason.CUSTOM, false);
         CourseWorkMod.MOB = this;
-        CourseWorkMod.mobInventory = Bukkit.getServer().createInventory(CourseWorkMod.MOB, 16, "Mob Inventory");
-        ;
+        CourseWorkMod.mobInventory = Bukkit.getServer().createInventory(CourseWorkMod.MOB, 18, "Mob Inventory");
     }
 
     @Override
@@ -37,9 +37,9 @@ public class Mob extends EntityZombie implements InventoryHolder {
         this.goalSelector.a(0, new PathfinderGoalFloat(this));
         this.goalSelector.a(1, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0f));
         this.goalSelector.a(2, new PetGoal(this, 1.5, 25.0f));
-        this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, 0.5d, false));
-        this.goalSelector.a(4, new PathfinderGoalNearestAttackableTarget<>(this, EntityMonster.class, false));
-        this.targetSelector.a(1, new PathfinderGoalNearestAttackableTarget<>(this, EntityMonster.class, false));
+        //this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, 0.5d, false));
+        //this.goalSelector.a(4, new PathfinderGoalNearestAttackableTarget<>(this, EntityMonster.class, false));
+        //this.targetSelector.a(1, new PathfinderGoalNearestAttackableTarget<>(this, EntityMonster.class, false));
     }
 
     @Override

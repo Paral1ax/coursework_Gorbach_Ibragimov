@@ -3,7 +3,9 @@ package me.constantine.courseworkmod.utils.containers;
 public class MessagesContainer {
     public static final String COMMAND_ERROR = "Command mistype";
     public static final String COMMAND_USED = "Command used";
-    public static final String COMMAND_HELP = "Available commands:\nhelp - \nbuild - ";
+    public static final String COMMAND_HELP = "Available commands:\nbuild - builds 2 types of houses or a farm\n" +
+            "mob - creates an intelligent assistant\n" +
+            "wand - gives you a wand to claim territory";
 
     public static final String EGG_ADDED = "Mob egg added to your inventory";
 

@@ -21,3 +21,6 @@ commands:
   teleport:
     description: mob teleports to player.
     usage: /<command>
+  die:
+    description: mob dies.
+    usage: /<command>

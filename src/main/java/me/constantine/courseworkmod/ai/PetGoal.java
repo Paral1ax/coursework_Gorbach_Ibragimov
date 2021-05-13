@@ -2,26 +2,27 @@ package me.constantine.courseworkmod.ai;
 
 import me.constantine.courseworkmod.CourseWorkMod;
 import net.minecraft.server.v1_16_R3.*;
-import org.bukkit.Bukkit;
 
 import java.util.EnumSet;
 
 public class PetGoal extends PathfinderGoal {
 
-    private final EntityInsentient a; // our pet
-    private EntityLiving b; // owner
+    private final EntityInsentient pet; // our pet
+    private EntityLiving owner; // owner
 
-    private final double f; // pet's speed
-    private final float g; // distance between owner & pet
+    private final double speed; // pet's speed
+    private final float maxDistance; // distance between owner & pet
+    private final float minDistance;
 
-    private double c; // x
-    private double d; // y
-    private double e; // z
+    private double x; // x
+    private double y; // y
+    private double z; // z
 
-    public PetGoal(EntityInsentient a, double speed, float distance) {
-        this.a = a;
-        this.f = speed;
-        this.g = distance;
+    public PetGoal(EntityInsentient pet, double speed, float minDistance, float maxDistance) {
+        this.pet = pet;
+        this.speed = speed;
+        this.minDistance = minDistance;
+        this.maxDistance = maxDistance;
         this.a(EnumSet.of(Type.MOVE));
     }
 
@@ -30,45 +31,59 @@ public class PetGoal extends PathfinderGoal {
         // Will start event if this is true
         // runs every tick
         if (!CourseWorkMod.MOB.stand) return false;
-        this.b = this.a.getGoalTarget();
-        if (this.b == null) {
+        this.owner = this.pet.getGoalTarget();
+        if (this.owner == null) {
             return false;
-        } else if (this.a.getDisplayName() == null) {
+        } else if (this.pet.getDisplayName() == null) {
             return false;
-        } else if (!(this.a.getDisplayName().toString().contains(this.b.getName()))) {
+        } else if (!(this.pet.getDisplayName().toString().contains(this.owner.getName()))) {
             return false;
-        } else if (this.b.h(this.a) > (double) (this.g * this.g)) {
+        } else if(getDistanceSq(owner) < (double) (minDistance * minDistance)){
+            return false;
+        } else if (this.owner.h(this.pet) > (double) (this.maxDistance * this.maxDistance)) {
             // distance is too far then teleport pet
-            a.setPosition(this.b.locX(), this.b.locY(), this.b.locZ());
+            pet.setPosition(this.owner.locX(), this.owner.locY(), this.owner.locZ());
             return false;
         } else {
             // follow owner
-            Vec3D vec = RandomPositionGenerator.a((EntityCreature) this.a, 16, 7, this.b.getPositionVector());
+            Vec3D vec = RandomPositionGenerator.a((EntityCreature) this.pet, 16, 7, this.owner.getPositionVector());
             // in air
             if (vec == null)
                 return false;
-            this.c = this.b.locX(); // x
-            this.d = this.b.locY(); // y
-            this.e = this.b.locZ(); // z
+            this.x = this.owner.locX(); // x
+            this.y = this.owner.locY(); // y
+            this.z = this.owner.locZ(); // z
             return true;
             // call upon c()
         }
     }
 
-    public void c() {
-        // runner :)                x      y        z    speed
-        if (!CourseWorkMod.MOB.stand) return;
-        this.a.getNavigation().a(this.c, this.d, this.e, this.f);
-    }
-
     public boolean b() {
         // run every tick as long as its true (repeats c)
         if (!CourseWorkMod.MOB.stand) return false;
-        return !this.a.getNavigation().m() && this.b.h(this.a) < (double) (this.g * this.g);
+        return !this.pet.getNavigation().m() && this.owner.h(this.pet) < (double) (this.maxDistance * this.maxDistance);
     }
+
+    public void c() {
+        if (!CourseWorkMod.MOB.stand) return;
+        // runner :)                x      y        z    speed
+        this.pet.getNavigation().a(this.x + 1, this.y, this.z + 1, this.speed);
+    }
+
 
     public void d() {
         // runs when done (b is false)
-        this.b = null;
+        this.owner = null;
+    }
+
+    public double getDistanceSq(Entity entityIn) {
+        return getDistanceSq(entityIn.getPositionVector());
+    }
+
+    public double getDistanceSq(Vec3D vec) {
+        double d0 = pet.locX() - vec.x;
+        double d1 = pet.locY() - vec.y;
+        double d2 = pet.locZ() - vec.z;
+        return d0 * d0 + d1 * d1 + d2 * d2;
     }
 }

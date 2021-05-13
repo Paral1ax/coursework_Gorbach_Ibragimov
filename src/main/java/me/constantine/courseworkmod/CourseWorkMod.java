@@ -24,11 +24,13 @@ public final class CourseWorkMod extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EventContainer(), this);
         Objects.requireNonNull(getCommand("mob")).setExecutor(new MobSpawnCommand());
         Objects.requireNonNull(getCommand("wand")).setExecutor(new WandCommand());
+        Objects.requireNonNull(getCommand("unclaim")).setExecutor(new UnclaimCommand());
         Objects.requireNonNull(getCommand("build")).setExecutor(new BuildCommand());
         Objects.requireNonNull(getCommand("standby")).setExecutor(new MobStandByCommand());
         Objects.requireNonNull(getCommand("notstandby")).setExecutor(new MobNotStandByCommand());
         Objects.requireNonNull(getCommand("teleport")).setExecutor(new MobTeleportCommand());
         Objects.requireNonNull(getCommand("die")).setExecutor(new MobDieCommand());
+        Objects.requireNonNull(getCommand("help")).setExecutor(new HelpCommand());
     }
 
 }

@@ -1,7 +1,5 @@
 package me.constantine.courseworkmod.items;
 
-import me.constantine.courseworkmod.CourseWorkMod;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;

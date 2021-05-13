@@ -13,10 +13,10 @@ public class WandCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            /*if(CourseWorkMod.MOB == null){
+            if (CourseWorkMod.MOB == null) {
                 Bukkit.broadcastMessage("You should spawn a mob first");
                 return false;
-            }*/     // расскомментить, когда закончится тестирование
+            }
             if (CourseWorkMod.PLAYER.getInventory().contains(ItemManager.wand))
                 return false;
             Player player = (Player) sender;

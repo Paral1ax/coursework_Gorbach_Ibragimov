@@ -1,4 +1,4 @@
-package me.constantine.courseworkmod.utils.executors.build;
+package me.constantine.courseworkmod.utils.executors.help;
 
 import me.constantine.courseworkmod.CourseWorkMod;
 import me.constantine.courseworkmod.utils.containers.MessagesContainer;

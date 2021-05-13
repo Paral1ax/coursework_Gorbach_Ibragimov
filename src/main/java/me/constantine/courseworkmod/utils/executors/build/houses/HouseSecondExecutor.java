@@ -13,29 +13,24 @@ public class HouseSecondExecutor {
     }
 
     private static void build() {
-        Location start = EmptySpace.minLoc;
-        Location end = EmptySpace.maxLoc;
+        Location start = CourseWorkMod.landClaimer.getMinLoc();
+        Location end = CourseWorkMod.landClaimer.getMaxLoc();
         double min_x = start.getX();
         double min_y = start.getY();
         double min_z = start.getZ();
         double max_x = end.getX();
         double max_y = end.getY();
         double max_z = end.getZ();
-        if (!validationArea(start, end)) {
-            Bukkit.broadcastMessage("This area is too small for building");
-            CourseWorkMod.landClaimer.clean();
-        } else {
-            EmptySpace.empty();
-            buildFoundation(start, min_x, min_y, min_z, max_x, max_z);
-            buildPiles(start, min_x, min_y, min_z);
-            buildPiles(start, max_x, min_y, min_z);
-            buildPiles(start, min_x, min_y, max_z);
-            buildPiles(start, max_x, min_y, max_z);
-            buildFirstLevel(start, min_x, min_y + 1, min_z, max_x, max_z);
-            buildSecondLevel(start, min_x, min_y + 2, min_z, max_x, max_y, max_z);
-            buildThirdLevel(start, min_x, min_y + 3, min_z, max_x, max_y, max_z);
-            buildFoundation(start, min_x, min_y + 4, min_z, max_x, max_z);
-        }
+        EmptySpace.empty();
+        buildFoundation(start, min_x, min_y, min_z, max_x, max_z);
+        buildPiles(start, min_x, min_y, min_z);
+        buildPiles(start, max_x, min_y, min_z);
+        buildPiles(start, min_x, min_y, max_z);
+        buildPiles(start, max_x, min_y, max_z);
+        buildFirstLevel(start, min_x, min_y + 1, min_z, max_x, max_z);
+        buildSecondLevel(start, min_x, min_y + 2, min_z, max_x, max_y, max_z);
+        buildThirdLevel(start, min_x, min_y + 3, min_z, max_x, max_y, max_z);
+        buildFoundation(start, min_x, min_y + 4, min_z, max_x, max_z);
     }
 
     private static void buildSecondLevel(Location start, double min_x, double min_y, double min_z, double max_x, double max_y, double max_z) {
@@ -131,13 +126,6 @@ public class HouseSecondExecutor {
             }
         }
         CourseWorkMod.landClaimer.clean();
-    }
-
-    private static boolean validationArea(Location start, Location end) {
-        if (Math.abs(start.getX() - end.getX()) > 4) {
-            return Math.abs(start.getZ() - end.getZ()) > 4;
-        }
-        return false;
     }
 
     private static void setDefaultLocation(Location location, double x, double y, double z) {

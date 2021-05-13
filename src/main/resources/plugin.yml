@@ -12,6 +12,9 @@ commands:
   wand:
     description: gives a wand.
     usage: /<command>
+  unclaim:
+    description: unclaimes territory.
+    usage: /<command>
   standby:
     description: mob stanby mode.
     usage: /<command>
@@ -23,4 +26,7 @@ commands:
     usage: /<command>
   die:
     description: mob dies.
+    usage: /<command>
+  help:
+    description: help dialog.
     usage: /<command>

@@ -17,10 +17,12 @@ public final class CourseWorkMod extends JavaPlugin {
     public static Mob MOB;
     public static Inventory mobInventory;
     public static LandClaimer landClaimer;
+    public static boolean pay = false;
 
     @Override
     public void onEnable() {
         ItemManager.init();
+        EventContainer.checkHealth(this);
         getServer().getPluginManager().registerEvents(new EventContainer(), this);
         Objects.requireNonNull(getCommand("mob")).setExecutor(new MobSpawnCommand());
         Objects.requireNonNull(getCommand("wand")).setExecutor(new WandCommand());
@@ -32,5 +34,4 @@ public final class CourseWorkMod extends JavaPlugin {
         Objects.requireNonNull(getCommand("die")).setExecutor(new MobDieCommand());
         Objects.requireNonNull(getCommand("help")).setExecutor(new HelpCommand());
     }
-
 }

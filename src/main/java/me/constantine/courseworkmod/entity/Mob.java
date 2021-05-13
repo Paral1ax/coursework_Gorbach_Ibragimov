@@ -5,12 +5,21 @@ import me.constantine.courseworkmod.ai.PetGoal;
 import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Server;
+import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionAttachment;
+import org.bukkit.permissions.PermissionAttachmentInfo;
+import org.bukkit.plugin.Plugin;
+
+import java.util.Set;
+import java.util.UUID;
 
 public class Mob extends EntityZombie implements InventoryHolder {
     public Inventory inventory;
@@ -55,4 +64,5 @@ public class Mob extends EntityZombie implements InventoryHolder {
     public Inventory getInventory() {
         return inventory;
     }
+
 }

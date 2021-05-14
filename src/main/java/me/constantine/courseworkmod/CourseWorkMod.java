@@ -4,6 +4,7 @@ import me.constantine.courseworkmod.commands.*;
 import me.constantine.courseworkmod.commands.mob.*;
 import me.constantine.courseworkmod.entity.Mob;
 import me.constantine.courseworkmod.events.EventContainer;
+import me.constantine.courseworkmod.events.eventHandler.OnMobInteraction;
 import me.constantine.courseworkmod.items.ItemManager;
 import me.constantine.courseworkmod.utils.claimer.LandClaimer;
 import org.bukkit.entity.Player;
@@ -22,6 +23,7 @@ public final class CourseWorkMod extends JavaPlugin {
     public void onEnable() {
         ItemManager.init();
         getServer().getPluginManager().registerEvents(new EventContainer(), this);
+        getServer().getPluginManager().registerEvents(new OnMobInteraction(),this);
         Objects.requireNonNull(getCommand("mob")).setExecutor(new MobSpawnCommand());
         Objects.requireNonNull(getCommand("wand")).setExecutor(new WandCommand());
         Objects.requireNonNull(getCommand("build")).setExecutor(new BuildCommand());

@@ -9,6 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -16,6 +17,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -60,12 +62,17 @@ public class OnMobInteraction implements Listener {
     }
     @EventHandler
     public void onNightTime(){
-        Server server=CourseWorkMod.PLAYER.getServer();
-        String sName=CourseWorkMod.PLAYER.getServer().getName();
-        if (server.getWorld(sName).getTime()==12500)
-            Bukkit.broadcastMessage("Наступает ночь, необходимо поспать!");
-        else if (server.getWorld(sName).getTime()==1)
-            Bukkit.broadcastMessage("Доброе утро!");
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                Server server=CourseWorkMod.PLAYER.getServer();
+                String sName=CourseWorkMod.PLAYER.getServer().getName();
+                if (server.getWorld(sName).getTime()==12500)
+                    Bukkit.broadcastMessage("Наступает ночь, необходимо поспать!");
+                else if (server.getWorld(sName).getTime()==1)
+                    Bukkit.broadcastMessage("Доброе утро!");
+            }
+        };
     }
     @EventHandler
     public void checkPickaxe(){
@@ -85,6 +92,7 @@ public class OnMobInteraction implements Listener {
             Bukkit.broadcastMessage(ChatColor.LIGHT_PURPLE+"Отлично, у тебя есть стартовая кирка! Не останавливайся на этом!");
         }
     }
+    @EventHandler
     public void checkSword(){
         Inventory inventory=CourseWorkMod.mobInventory;
         if (inventory.contains(Material.DIAMOND_SWORD))

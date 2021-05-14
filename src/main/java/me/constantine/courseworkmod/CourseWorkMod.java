@@ -31,6 +31,7 @@ public final class CourseWorkMod extends JavaPlugin {
         Objects.requireNonNull(getCommand("notstandby")).setExecutor(new MobNotStandByCommand());
         Objects.requireNonNull(getCommand("teleport")).setExecutor(new MobTeleportCommand());
         Objects.requireNonNull(getCommand("die")).setExecutor(new MobDieCommand());
+        Objects.requireNonNull(getCommand("tptomob")).setExecutor(new TpToMobCommand());
     }
 
 }

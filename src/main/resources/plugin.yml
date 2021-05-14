@@ -24,3 +24,6 @@ commands:
   die:
     description: mob dies.
     usage: /<command>
+  tptomob:
+    description: tping you to assistant
+    usage: /<command>

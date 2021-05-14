@@ -3,6 +3,7 @@ package me.constantine.courseworkmod.commands.mob;
 import me.constantine.courseworkmod.CourseWorkMod;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,7 +15,11 @@ public class MobTeleportCommand implements CommandExecutor {
         if (sender instanceof Player) {
             if(CourseWorkMod.MOB != null){
                 Location playerLocation = CourseWorkMod.PLAYER.getLocation();
-                CourseWorkMod.MOB.teleportAndSync(playerLocation.getX() + 1, playerLocation.getY(), playerLocation.getZ());
+                Location futureTp=new Location(playerLocation.getWorld(),playerLocation.getX() + 1, playerLocation.getY(), playerLocation.getZ());
+                if (futureTp.getBlock().getBlockData().getMaterial()== Material.AIR){
+                    CourseWorkMod.MOB.teleportAndSync(playerLocation.getX() + 1, playerLocation.getY(), playerLocation.getZ());
+                }
+                else CourseWorkMod.MOB.teleportAndSync(playerLocation.getX(), playerLocation.getY(), playerLocation.getZ());
                 Bukkit.broadcastMessage("Mob teleported");
             }
         } else {

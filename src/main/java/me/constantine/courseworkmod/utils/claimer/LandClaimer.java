@@ -1,6 +1,5 @@
 package me.constantine.courseworkmod.utils.claimer;
 
-import me.constantine.courseworkmod.CourseWorkMod;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,9 +13,9 @@ import java.util.List;
 public class LandClaimer {
     private Block first;
     private Block second;
-    private List<Block> list = new ArrayList<>();
-    private double minX, minY, minZ, maxX, maxY, maxZ;
+    private final List<Block> list = new ArrayList<>();
     private Location minLoc, maxLoc;
+    private Material initialMaterial;
 
     public void process() {
         if (first == null || second == null) return;
@@ -27,10 +26,12 @@ public class LandClaimer {
         list.add(new Location(world, second.getX(), mainY, first.getZ()).getBlock());
         list.add(new Location(world, first.getX(), mainY, second.getZ()).getBlock());
         compare();
-        if (!validationArea(minLoc, maxLoc)) {
+        if (!validateArea(minLoc, maxLoc)) {
             Bukkit.broadcastMessage("This area is too small for building");
             clean();
+            return;
         }
+        initialMaterial = first.getType();
         for (Block block : list) {
             block.setType(Material.OAK_PLANKS);
         }
@@ -52,17 +53,17 @@ public class LandClaimer {
             listY.add(block.getY());
         for (Block block : list)
             listZ.add(block.getZ());
-        minX = Collections.min(listX);
-        minY = Collections.min(listY);
-        minZ = Collections.min(listZ);
-        maxX = Collections.max(listX);
-        maxY = minY + 5;
-        maxZ = Collections.max(listZ);
+        double minX = Collections.min(listX);
+        double minY = Collections.min(listY);
+        double minZ = Collections.min(listZ);
+        double maxX = Collections.max(listX);
+        double maxY = minY + 5;
+        double maxZ = Collections.max(listZ);
         minLoc = new Location(first.getWorld(), minX, minY, minZ);
         maxLoc = new Location(first.getWorld(), maxX, maxY, maxZ);
     }
 
-    private static boolean validationArea(Location start, Location end) {
+    private boolean validateArea(Location start, Location end) {
         if (Math.abs(start.getX() - end.getX()) > 4) {
             return Math.abs(start.getZ() - end.getZ()) > 4;
         }
@@ -88,6 +89,10 @@ public class LandClaimer {
 
     public Location getMaxLoc() {
         return maxLoc;
+    }
+
+    public Material getInitialMaterial() {
+        return initialMaterial;
     }
 
     public void setSecond(Block second) {

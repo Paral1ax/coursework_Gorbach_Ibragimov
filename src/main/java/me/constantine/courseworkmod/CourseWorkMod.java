@@ -3,7 +3,7 @@ package me.constantine.courseworkmod;
 import me.constantine.courseworkmod.commands.*;
 import me.constantine.courseworkmod.commands.mob.*;
 import me.constantine.courseworkmod.entity.Mob;
-import me.constantine.courseworkmod.events.EventContainer;
+import me.constantine.courseworkmod.events.AssistiveEvents;
 import me.constantine.courseworkmod.items.ItemManager;
 import me.constantine.courseworkmod.utils.claimer.LandClaimer;
 import org.bukkit.entity.Player;
@@ -22,8 +22,8 @@ public final class CourseWorkMod extends JavaPlugin {
     @Override
     public void onEnable() {
         ItemManager.init();
-        EventContainer.checkHealth(this);
-        getServer().getPluginManager().registerEvents(new EventContainer(), this);
+        AssistiveEvents.checkHealth(this);
+        getServer().getPluginManager().registerEvents(new AssistiveEvents(), this);
         Objects.requireNonNull(getCommand("mob")).setExecutor(new MobSpawnCommand());
         Objects.requireNonNull(getCommand("wand")).setExecutor(new WandCommand());
         Objects.requireNonNull(getCommand("unclaim")).setExecutor(new UnclaimCommand());
@@ -33,5 +33,6 @@ public final class CourseWorkMod extends JavaPlugin {
         Objects.requireNonNull(getCommand("teleport")).setExecutor(new MobTeleportCommand());
         Objects.requireNonNull(getCommand("die")).setExecutor(new MobDieCommand());
         Objects.requireNonNull(getCommand("help")).setExecutor(new HelpCommand());
+        Objects.requireNonNull(getCommand("tptomob")).setExecutor(new TpToMobCommand());
     }
 }

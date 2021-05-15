@@ -30,3 +30,6 @@ commands:
   help:
     description: help dialog.
     usage: /<command>
+  tptomob:
+    description: teleports player to mob.
+    usage: /<command>

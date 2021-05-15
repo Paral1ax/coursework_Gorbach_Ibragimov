@@ -38,11 +38,11 @@ public class Mob extends EntityZombieHusk implements InventoryHolder {
         this.goalSelector.a(0, new PathfinderGoalFloat(this));
         this.goalSelector.a(1, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0f));
         this.goalSelector.a(2, new PetGoal(this, 1.5, 3.0f, 25.0f));
-        //this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, 0.5d, false));
-        //this.goalSelector.a(3, new PathfinderGoalNearestAttackableTarget<>(this, EntityMonster.class,
-          //      10, true, false, entity -> entity.getEntityType() != EntityTypes.HUSK));
-        //this.targetSelector.a(1, new PathfinderGoalNearestAttackableTarget<>(this, EntityMonster.class,
-          //      10, true, false, entity -> entity.getEntityType() != EntityTypes.HUSK));
+        this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, 0.5d, false));
+        this.goalSelector.a(3, new PathfinderGoalNearestAttackableTarget<>(this, EntityMonster.class,
+                10, true, false, entity -> entity.getEntityType() != EntityTypes.HUSK));
+        this.targetSelector.a(1, new PathfinderGoalNearestAttackableTarget<>(this, EntityMonster.class,
+                10, true, false, entity -> entity.getEntityType() != EntityTypes.HUSK));
     }
 
     public void setOwner(Player player) {

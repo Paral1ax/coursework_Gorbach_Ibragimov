@@ -7,16 +7,16 @@ import java.util.EnumSet;
 
 public class PetGoal extends PathfinderGoal {
 
-    private final EntityInsentient pet; // our pet
-    private EntityLiving owner; // owner
+    private final EntityInsentient pet;
+    private EntityLiving owner;
 
     private final double speed; // pet's speed
     private final float maxDistance; // distance between owner & pet
     private final float minDistance;
 
-    private double x; // x
-    private double y; // y
-    private double z; // z
+    private double x;
+    private double y;
+    private double z;
 
     public PetGoal(EntityInsentient pet, double speed, float minDistance, float maxDistance) {
         this.pet = pet;
@@ -38,7 +38,7 @@ public class PetGoal extends PathfinderGoal {
             return false;
         } else if (!(this.pet.getDisplayName().toString().contains(this.owner.getName()))) {
             return false;
-        } else if(getDistanceSq(owner) < (double) (minDistance * minDistance)){
+        } else if (getDistanceSq(owner) < (double) (minDistance * minDistance)) {
             return false;
         } else if (this.owner.h(this.pet) > (double) (this.maxDistance * this.maxDistance)) {
             // distance is too far then teleport pet
@@ -66,7 +66,7 @@ public class PetGoal extends PathfinderGoal {
 
     public void c() {
         if (!CourseWorkMod.MOB.stand) return;
-        // runner :)                x      y        z    speed
+        // runner :)
         this.pet.getNavigation().a(this.x + 1, this.y, this.z + 1, this.speed);
     }
 

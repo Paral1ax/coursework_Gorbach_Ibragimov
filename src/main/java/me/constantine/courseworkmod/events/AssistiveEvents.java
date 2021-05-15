@@ -1,26 +1,20 @@
 package me.constantine.courseworkmod.events;
 
 import me.constantine.courseworkmod.CourseWorkMod;
-import me.constantine.courseworkmod.entity.Mob;
 import me.constantine.courseworkmod.items.ItemManager;
 import me.constantine.courseworkmod.utils.claimer.LandClaimer;
-import net.minecraft.server.v1_16_R3.DamageSource;
-import net.minecraft.server.v1_16_R3.EntityZombieHusk;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_16_R3.entity.CraftHusk;
-import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.*;
 import org.bukkit.plugin.Plugin;
 
 import java.util.Objects;
 
-public class EventContainer implements Listener {
+public class AssistiveEvents implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         CourseWorkMod.PLAYER = event.getPlayer();
